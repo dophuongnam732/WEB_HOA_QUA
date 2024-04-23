@@ -1,0 +1,130 @@
+<p-toast></p-toast>
+
+<section class="breadcrumb-section set-bg" [ngStyle]="{backgroundImage:'url(assets/image/1920x1080.jpg'}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Checkout</h2>
+          <div class="breadcrumb__option">
+            <a routerLink="/" >Home</a>
+            <span>Checkout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-details spad" *ngIf="product != null">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__pic">
+          <div class="product__details__pic__item">
+            <img class="product__details__pic__item--large"
+                 src="{{'data:image/jpg;base64,' + product.images[0].data}}" alt="{{product.name}}" >
+          </div>
+          <div class="product__details__pic__slider">
+            <img src="{{'data:image/jpg;base64,' + image.data}}" alt="" *ngFor="let image of product.images" class="col-3">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="product__details__text">
+          <h3>{{product.name}}</h3>
+          <div class="product__details__rating">
+            <fa-icon [icon]="star"></fa-icon>
+            <fa-icon [icon]="star"></fa-icon>
+            <fa-icon [icon]="star"></fa-icon>
+            <fa-icon [icon]="star"></fa-icon>
+            <fa-icon [icon]="star_half"></fa-icon>
+            <span>(18 reviews)</span>
+          </div>
+          <div class="product__details__price">{{product.price}} &#x20AB;</div>
+          <p>{{product.description}}</p>
+          <div class="product__details__quantity">
+            <div class="quantity">
+              <div class="pro-qty">
+                <span class="dec qtybtn" (click)="subtractQuantity()">-</span>
+                <input type="text" [(ngModel)]="quantity">
+                <span class="inc qtybtn" (click)="plusQuantity()" >+</span>
+              </div>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="primary-btn" (click)="addCart(product)">ADD TO CART</a>
+          <ul>
+            <li><b>Availability</b> <span>In Stock</span></li>
+<!--            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>-->
+            <li><b>Weight</b> <span>>3 kg</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <p-tabView >
+          <p-tabPanel header="Description">
+            <div class="tab-pane">
+              <div class="product__details__tab__desc">
+                <h6>Thông tin tất cả sản phẩm</h6>
+                <p>Với cam kết của chúng tôi về chất lượng, chúng tôi chỉ cung cấp những loại hoa quả tươi mới nhất.
+                  Từ các quả mọng nước, ngọt ngào của dứa, dưa hấu đến những quả chua chua tươi mát như cam, chanh và kiwi,
+                  mỗi quả hoa quả đều được chọn lựa kỹ càng để đảm bảo hương vị tuyệt vời. Chúng tôi luôn đặt mục tiêu mang đến
+                  cho khách hàng những trái cây tươi ngon và giàu dinh dưỡng.</p>
+                <p>Sản phẩm hoa quả của chúng tôi không chỉ đảm bảo chất lượng mà còn được nhập khẩu từ các nguồn gốc uy tín. Chúng tôi tìm kiếm những vùng trồng hoa quả chất lượng cao trên khắp thế giới, từ vùng nhiệt đới đến vùng ôn đới, để đảm bảo rằng khách hàng của chúng tôi nhận được những loại hoa quả tốt nhất.
+                  Đội ngũ nhân viên của chúng tôi là những người có kinh nghiệm và tận tâm. Họ sẵn sàng cung cấp cho khách hàng thông
+                  tin về nguồn gốc, cách chọn lựa và bảo quản hoa quả một cách tốt nhất. Chúng tôi đặt lợi ích và sự hài lòng của khách hàng lên hàng đầu và luôn sẵn lòng hỗ trợ mọi nhu cầu mua sắm của quý khách</p>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Reviews">
+            <div class="tab-pane">
+              <div class="product__details__tab__desc">
+                <h6>Đánh giá từ khách hàng</h6>
+                <p>Chúng tôi rất tự hào về những đánh giá tích cực từ khách hàng về sản phẩm hoa quả của chúng tôi. Đó là một phần quan trọng
+                  trong việc chứng minh chất lượng và dịch vụ tốt mà chúng tôi cung cấp. Khách hàng của chúng tôi đã đánh giá sản phẩm hoa quả của
+                  chúng tôi là tươi ngon, đa dạng và chất lượng cao. Họ đã chia sẻ rằng hoa quả mà chúng tôi cung cấp luôn tươi mới và giữ được hương vị tuyệt vời. Đánh giá này cho thấy cam kết của chúng tôi trong việc mang đến cho khách hàng những sản phẩm tốt nhất.
+                  Ngoài ra, khách hàng cũng đã nhận xét về sự tận tâm và chuyên nghiệp của nhân viên cửa hàng. Họ đã được hướng dẫn về cách chọn lựa hoa quả, thông tin về nguồn gốc và cách bảo quản. Đánh giá này chứng minh rằng nhân viên của chúng tôi luôn tận hưởng việc giúp đỡ khách hàng và mang đến cho họ trải nghiệm mua sắm thú vị và thoải mái.
+                  Chúng tôi cũng đã nhận được phản hồi tích cực về giá cả hợp lý của sản phẩm. Khách hàng đánh giá rằng chúng tôi cung cấp giá trị tốt cho số tiền họ chi trả. Điều này cho thấy cam kết của chúng tôi trong việc cung cấp sản phẩm chất lượng với mức giá phù hợp.</p>
+
+              </div>
+            </div>
+
+          </p-tabPanel>
+        </p-tabView>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="related-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title related__product__title">
+          <h2>Related Product</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of listRelatedProduct">
+        <div class="featured__item">
+          <div class="featured__item__pic set-bg" [ngStyle]="{'background-image': 'url(data:image/jpeg;base64,'+ product.images[0].data+')'}">
+            <ul class="featured__item__pic__hover">
+              <li><a href="javascript:void(0)" (click)="addToWishList(product)"><fa-icon [icon]="heart"></fa-icon></a></li>
+              <li><a href="javascript:void(0)" routerLink="/product/{{product.id}}"><fa-icon [icon]="retweet"></fa-icon></a></li>
+              <li><a href="javascript:void(0)" (click)="addToCart(product)"><fa-icon [icon]="bag"></fa-icon></a></li>
+            </ul>
+          </div>
+          <div class="featured__item__text">
+            <h6><a href="javascript:void(0)">{{product.name}}</a></h6>
+            <h5>{{product.quantity > 0 ? product.price + ' đ' : 'ĐÃ HẾT HÀNG' }}</h5>
+            <p *ngIf="product.quantity > 0">Còn: {{product.quantity}} (kg)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

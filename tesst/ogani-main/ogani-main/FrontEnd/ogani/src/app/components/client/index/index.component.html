@@ -1,0 +1,300 @@
+
+<p-toast></p-toast>
+
+<p-dialog [(visible)]="authModal" [style]="{width: '30vw'}"  [baseZIndex]="10000" [modal]="true" [dismissableMask]="true">
+    <p-tabView>
+        <p-tabPanel header="Đăng nhập">
+            <div class="p-field">
+                <label for="username">Tên đăng nhập: </label>
+                <input type="text" pInputText class="w-full" [(ngModel)]="loginForm.username" name="username">
+              </div>
+              <div class="p-field">
+                <label for="password">Mật khẩu: </label>
+                <input type="password" pPassword class="w-full" [(ngModel)]="loginForm.password" name="password">
+              </div>
+              <div class="p-field mt-3">
+                <button type="submit" pButton (click)="login()">Đăng nhập</button>
+              </div>
+        </p-tabPanel>
+<!--        <p-tabPanel header="Đăng ký">-->
+<!--            <form action="">-->
+<!--                <div class="p-field">-->
+<!--                    <label for="username">Tên đăng nhập: </label>-->
+<!--                    <input type="text" pInputText class="w-full" [(ngModel)]="registerForm.username" name="username">-->
+<!--                </div>-->
+<!--                <div class="p-field">-->
+<!--                    <label for="email">Email: </label>-->
+<!--                    <input type="email" pInputText class="w-full" [(ngModel)]="registerForm.email" name="email">-->
+<!--                </div>-->
+<!--                <div class="p-field">-->
+<!--                    <label for="password">Mật khẩu: </label>-->
+<!--                    <input type="password" pPassword  class="w-full" [(ngModel)]="registerForm.password" name="password">-->
+<!--                </div>-->
+<!--                <div class="p-field mt-3">-->
+<!--                    <button type="submit" pButton (click)="register()">Đăng ký</button>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--        </p-tabPanel>-->
+    </p-tabView>
+</p-dialog>
+
+
+
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> nam145073@huce.edu.vn</li>
+                            <li>Free Shipping for all Order of 400.00đ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngIf="isLoggedIn && useDetail !== null" class="col-lg-6 col-md-6">
+                  <p class="header__top__left" style="float: right; color: red; font-size: 25px; margin: 0">{{"Welcome, " + useDetail}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="header__logo">
+                    <a href="javascript:void(0)" routerLink="/" ><img src="assets/image/logo5.png" alt=""></a>
+                </div>
+            </div>
+          <div class="col-lg-7">
+            <nav class="header__menu">
+              <ul>
+                <li class="menu-link"><a href="javascript:void(0)" routerLink="/">Home</a></li>
+                <li class="menu-link"><a href="javascript:void(0)" routerLink="/category/3">Shop</a></li>
+                <li>
+                  <a class="menu-link" href="javascript:void(0)">Pages</a>
+                  <ul class="header__menu__dropdown">
+<!--                    <li class="menu-link"><a href="javascript:void(0)">Shop Details</a></li>-->
+                    <li class="menu-link"><a href="javascript:void(0)" routerLink="/cart">Shoping Cart</a></li>
+<!--                    <li class="menu-link"><a href="javascript:void(0)" routerLink="/checkout">Check Out</a></li>-->
+<!--                    <li class="menu-link"><a href="javascript:void(0)">Blog Details</a></li>-->
+                  </ul>
+                </li>
+                <li class="menu-link"><a href="javascript:void(0)" routerLink="/blog">Blog</a></li>
+                <li class="menu-link"><a href="javascript:void(0)" (click)="showFormContact()">Contact</a></li>
+                <li class="menu-link" *ngIf="isLoggedIn && useDetail === 'admin'"><a href="javascript:void(0)" routerLink="/admin">Admin</a></li>
+                <div>
+                        <p-dialog header="Thông tin liên hệ" [(visible)]="displayForm" [style]="{width: '30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+                          <form action="">
+                            <div class="p-field">
+                              <h2 style="color: red">Cửa hàng bán Trái cây</h2>
+                              <br>
+                              <p>=> Lưu ý: Shop chuyên cung cấp các mặt hàng, sản phẩm, giao hàng trong khu vực Tp.Hà Nội và các tỉnh thành lân cận</p>
+                              <p>=> Về chất lượng sản phẩm: Chúng tôi tự hào mang đến những sản phẩm trái cây nhập khẩu cao cấp với chất lượng tuyệt hảo.
+                                Sản xuất và cung cấp đến khách hàng những sản phẩm ổn định về chất lượng, đảm bảo vệ sinh an toàn thực phẩm, kiểm soát
+                                tốt chất lượng từ nguồn nguyên liệu đến thành phẩm. Đảm bảo đủ nguồn lực duy trì cải tiến và nâng cao hiệu quả của hệ
+                                thống quản lý chất lượng ISO 9001:2015, HACCP, BRC GS, Halal. </p>
+                              <p>=> Hướng dẫn cách truy xuất nguồn gốc sản phẩm : Mỗi sản phẩm khi giao đến tay khách hàng đều có gắn mã QR trên bao bì sản phẩm.
+                                Người tiêu dùng có thể truy xuất nhanh nguồn gốc sản phẩm qua mã QR. Ở đây, Tất cả các thông tin liên quan về sản phẩm và nhà
+                                sản xuất sẽ hiển thị</p>
+                              <p>Chủ shop: Đỗ Phương Nam</p>
+                              <p>Sđt: 0971126846</p>
+                              <p>Fax: 5050505050</p>
+                              <p>Đ/c: 43 Nguyễn Chí Thanh - Ba Đình - Hà Nội</p>
+                            </div>
+                            <div class="p-field mt-3">
+                              <button pButton type="button" class="p-button-danger ml-3" (click)="displayForm=false">Đóng</button>
+                            </div>
+                          </form>
+                        </p-dialog>
+                </div>
+              </ul>
+            </nav>
+          </div>
+            <div class="col-lg-2">
+                <div class="header__cart">
+                    <ul>
+                        <li><a href="javascript:void(0)" (click)="wishlist.toggle($event)"><fa-icon [icon]="heart"></fa-icon> <span>{{wishlistService.items.length}}</span></a></li>
+                        <p-overlayPanel #wishlist>
+                            <ng-template pTemplate>
+                                <div class="listItemInCart">
+                                    <ul>
+                                        <li *ngFor="let product of wishlistService.items" class="cart-box">
+                                            <div class="cart-box-image p-2">
+                                                <a href="javascript:void(0)" class="block"><img src="{{'data:image/jpg;base64,' + product.images[0].data}}" alt="" width="80px" routerLink="/product/{{product.id}}"></a>
+                                            </div>
+                                            <div class="cart-box-text">
+                                                <a href="javascript:void(0)">{{product.name}}</a>
+                                            </div>
+                                            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="removeWishList(product)"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </ng-template>
+                        </p-overlayPanel>
+                        <li><a href="javascript:void(0)" (click)="cart.toggle($event)"><fa-icon [icon]="bag"></fa-icon> <span>{{cartService.items.length}}</span></a></li>
+                        <p-overlayPanel #cart>
+                            <ng-template pTemplate>
+                                <div class="listItemInCart">
+                                    <ul>
+                                        <li *ngFor="let product of cartService.items" class="cart-box">
+                                            <div class="cart-box-image p-2">
+                                                <a href="javascript:void(0)" class="block"><img src="{{'data:image/jpg;base64,' + product.images[0].data}}" alt="" width="80px"></a>
+                                            </div>
+                                            <div class="cart-box-text">
+                                                <a href="javascript:void(0)">{{product.name}}</a>
+                                                <div><span>{{product.quantity}} x </span>{{product.price}} &#x20AB;</div>
+                                            </div>
+                                            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="removeFromCart(product)"></button>
+                                        </li>
+                                    </ul>
+                                    <p-divider></p-divider>
+                                    <div class="text-center">
+                                        <strong>Tổng: </strong><span class="ml-2">{{cartService.getTotalPrice()}} &#x20AB;</span>
+                                    </div>
+                                    <p-divider></p-divider>
+                                    <div class="cart-button">
+                                        <button pButton pRipple label="GO TO CART" class="w-full p-button-warning" routerLink="cart"></button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-overlayPanel>
+                        <li>
+                            <a href="javascript:void(0)" (click)="showAuthForm()" *ngIf="!isLoggedIn"><fa-icon [icon]="userIcon"></fa-icon></a>
+                            <a href="javascript:void(0)" (click)="profile.toggle($event)" *ngIf="isLoggedIn"><fa-icon [icon]="userIcon"></fa-icon></a>
+                            <p-overlayPanel #profile>
+                                <div >
+                                    <a class="dropdown-item" href="javascript:void(0)" routerLink="/user" >
+                                        <fa-icon [icon]="userIcon"></fa-icon>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0)" routerLink="my-order">
+                                        <fa-icon [icon]="bag"></fa-icon>
+                                        My Orders
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" (click)="logout();profile.toggle($event)" >
+                                        <fa-icon [icon]="logoutIcon"></fa-icon>
+                                        Logout
+                                    </a>
+                                </div>
+                            </p-overlayPanel>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="humberger__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<section class="hero">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-3" (mouseenter)="showDepartment = true" (mouseleave)="showDepartment = false">
+            <div class="hero__categories">
+              <div class="hero__categories__all" (click)="showDepartmentClick()">
+                <fa-icon [icon]="bars"></fa-icon>
+                <span>All departments</span>
+              </div>
+              <ul *ngIf="showDepartment" style="background-color: #D3D3D3;">
+                <li *ngFor="let category of listCategoryEnabled">
+                  <a href="javascript:void(0)" routerLink="category/{{category.id}}" (mouseenter)="category.isHovered = true" (mouseleave)="category.isHovered = false" [style.color]="category.isHovered ? '#D2691E' : 'inherit'">{{category.name}}</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do yo u need?" [(ngModel)]="keyword" name="keyword">
+                            <button class="site-btn" routerLink="/search/{{keyword}}">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <fa-icon [icon]="phone"></fa-icon>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+84 971.126.846</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<router-outlet></router-outlet>
+
+
+
+<footer class="footer spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <p><img src="assets/image/logo5.png" alt=""></p>
+                    </div>
+                    <ul>
+                        <li><a href="https://www.google.com/maps/place/43+%C4%90.+Nguy%E1%BB%85n+Ch%C3%AD+Thanh,+Gi%E1%BA%A3ng+V%C3%B5,+Ba+%C4%90%C3%ACnh,+H%C3%A0+N%E1%BB%99i,+Vi%E1%BB%87t+Nam/@21.0262079,105.8101573,17z/data=!3m1!4b1!4m6!3m5!1s0x3135ab6ed5f0bd85:0xd0f38ebd609ff75b!8m2!3d21.0262029!4d105.8127322!16s%2Fg%2F11f_kpjcnw?entry=ttu">Address: 43 Nguyen Chi Thanh, Giang Vo, Ba Dinh, Ha Noi</a></li>
+                        <li>Phone: +84 971.126.846</li>
+                        <li>Email: nam145073@huce.edu.vn</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="footer__widget">
+                    <h6>Useful Links</h6>
+                    <ul>
+                        <li><a href="javascript:void(0)">About Us</a></li>
+                        <li><a href="javascript:void(0)">About Our Shop</a></li>
+                        <li><a href="javascript:void(0)">Secure Shopping</a></li>
+                        <li><a href="javascript:void(0)">Delivery infomation</a></li>
+                        <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)">Our Sitemap</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="javascript:void(0)">Who We Are</a></li>
+                        <li><a href="javascript:void(0)">Our Services</a></li>
+                        <li><a href="javascript:void(0)">Projects</a></li>
+                        <li><a href="javascript:void(0)">Contact</a></li>
+                        <li><a href="javascript:void(0)">Innovation</a></li>
+                        <li><a href="javascript:void(0)">Testimonials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>Join Our Newsletter Now</h6>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
+                    <form action="#">
+                        <input type="text" placeholder="Enter your mail">
+                        <button type="submit" class="site-btn">Subscribe</button>
+                    </form>
+                    <div class="footer__widget__social">
+                        <a href="javascript:void(0)"><i class="fa fa-facebook"></i></a>
+                        <a href="javascript:void(0)"><i class="fa fa-instagram"></i></a>
+                        <a href="javascript:void(0)"><i class="fa fa-twitter"></i></a>
+                        <a href="javascript:void(0)"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+

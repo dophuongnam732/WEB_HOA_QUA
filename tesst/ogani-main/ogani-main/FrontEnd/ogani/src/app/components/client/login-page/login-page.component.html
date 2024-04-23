@@ -1,0 +1,84 @@
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form action="#">
+      <h1>Create Account</h1>
+      <h6 style="color: red">Registration may take 10-15 seconds</h6>
+      <input type="text" placeholder="Username" [(ngModel)]="registerForm.username" name="username" (input)="isUsernameInvalid = false" />
+      <span *ngIf="isUsernameInvalid" class="error-message" style="font-size: 16px;">Tài khoản không được để trống</span>
+      <span class="error-message" style="font-size: 16px;" *ngIf="registerForm.username && !registerForm.username.match('.{5,30}')">Tài khoản chỉ được nhập từ 6-30 kí tự.</span>
+
+      <input type="email" placeholder="Email" [(ngModel)]="registerForm.email" name="email" (input)="isEmailInvalid = false" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
+      <span *ngIf="isEmailInvalid" class="error-message" style="font-size: 16px;">Email không được để trống</span>
+      <span *ngIf="registerForm.email && !registerForm.email.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')" class="error-message" style="font-size: 16px;">Email không hợp lệ</span>
+
+
+<!--      <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" [(ngModel)]="registerForm.password" name="password" (input)="isPasswordInvalid = false" pattern=".{6,30}"/>-->
+<!--      <span class="show-password-icon" (click)="showPassword = !showPassword">-->
+<!--      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i> </span>-->
+<!--      <span *ngIf="isPasswordInvalid" class="error-message" style="font-size: 16px;">Mật khẩu không được để trống</span>-->
+<!--      <span class="error-message" style="font-size: 16px;" *ngIf="registerForm.password && !registerForm.password.match('.{6,30}')">Mật khẩu chỉ được nhập từ 6-30 kí tự.</span>-->
+
+      <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" [(ngModel)]="registerForm.password" name="password" (input)="isPasswordInvalid = false" pattern=".{6,30}"/>
+      <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Confirm Password" [(ngModel)]="registerForm.confirmPassword" name="confirmPassword" (input)="isPasswordInvalid = false" pattern=".{6,30}"/>
+      <span class="show-password-icon" (click)="showPassword = !showPassword">
+  <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+ </span>
+      <span *ngIf="isPasswordInvalid" class="error-message" style="font-size: 16px;">Mật khẩu không được để trống</span>
+      <span class="error-message" style="font-size: 16px;" *ngIf="registerForm.password && !registerForm.password.match('.{6,30}')">Mật khẩu chỉ được nhập từ 6-30 kí tự.</span>
+      <span *ngIf="registerForm.password !== registerForm.confirmPassword" class="error-message" style="font-size: 16px;">Mật khẩu không được để trống và phải giống nhau.</span>
+      <br>
+      <button (click)="register()">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="#">
+      <h1>Sign in</h1>
+      <input type="text" placeholder="Username" [(ngModel)]="loginForm.username" name="username" (input)="isUsernameInvalid = false"/>
+      <span *ngIf="isUsernameInvalid" class="error-message" style="font-size: 16px;">Vui lòng nhập tên tài khoản.</span>
+      <span class="error-message" style="font-size: 16px;" *ngIf="loginForm.username && !loginForm.username.match('.{5,30}')">Tài khoản chỉ được nhập từ 6-30 kí tự.</span>
+
+      <input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" [(ngModel)]="loginForm.password" name="password" (input)="isPasswordInvalid = false" pattern=".{6,30}"/>
+      <span class="show-password-icon" (click)="showPassword = !showPassword">
+      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i> </span>
+      <span *ngIf="isPasswordInvalid" class="error-message" style="font-size: 16px;">Vui lòng nhập mật khẩu</span>
+      <span class="error-message" style="font-size: 16px;" *ngIf="loginForm.password && !loginForm.password.match('.{6,30}')">Mật khẩu chỉ được nhập từ 6-30 kí tự.</span>
+
+      <br>
+      <button pButton pRipple (click)="login()">Sign In</button>
+
+      <a class="forgot-password-link" (click)="showForm()">Quên mật khẩu?</a>
+
+
+    </form>
+  </div>
+  <div>
+    <p-dialog header="Quên mật khẩu" [(visible)]="displayForm" [style]="{width: '30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+      <form action="">
+        <div class="p-field">
+          <label for="email">Email: </label>
+          <input type="email" placeholder="Nhập email cần gửi" [(ngModel)]="ForgotForm.email" name="email" (input)="isEmailInvalid = false" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
+          <span *ngIf="isEmailInvalid" class="error-message" style="font-size: 16px;">Email không được để trống</span>
+          <span *ngIf="ForgotForm.email && !ForgotForm.email.match('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')" class="error-message" style="font-size: 16px;">Email không hợp lệ</span>
+        </div>
+        <div class="p-field mt-3">
+          <button type="submit" pButton (click)="sendForgotPasswordRequest()" *ngIf="!isEmailInvalid">Gửi</button>
+          <button pButton type="button" class="p-button-danger ml-3" (click)="displayForm=false">Hủy</button>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn" (click)="loginFormChange()">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp" (click)="registerFormChange()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>

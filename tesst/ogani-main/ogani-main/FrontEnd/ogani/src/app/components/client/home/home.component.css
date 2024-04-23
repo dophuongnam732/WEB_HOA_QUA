@@ -1,0 +1,19 @@
+.hero__item {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Đặt chiều cao của banner */
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.right {
+  background-position: right center; /* Đưa ảnh về phía bên phải */
+}
+a.selected {
+  background-color: red;
+}
+.product-name {
+  font-size: 18px;
+  color: blue;
+}
